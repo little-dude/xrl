@@ -26,6 +26,8 @@ pub use self::plugins::PluginStoped;
 pub use self::plugins::UpdateCmds;
 pub use self::config::ConfigChanged;
 pub use self::config::ConfigChanges;
+pub use self::config::ModifyUserConfig;
+pub use self::config::ConfigDomain;
 pub use self::view::{MeasureWidth, ViewId};
 pub use self::modifyselection::ModifySelection;
 pub use self::theme::{AvailableThemes, ThemeChanged, ThemeSettings};

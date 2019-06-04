@@ -4,7 +4,7 @@ use crate::errors::ClientError;
 use crate::protocol;
 use serde_json::{from_value, to_value, Map};
 use serde::Serialize;
-use crate::structs::{ModifySelection, ViewId};
+use crate::structs::{ModifySelection, ViewId, ModifyUserConfig, ConfigChanges, ConfigDomain};
 
 /// A future returned by all the `Client`'s method.
 pub type ClientResult<T> = Box<dyn Future<Item = T, Error = ClientError> + Send>;
@@ -602,15 +602,12 @@ impl Client {
         )
     }
     
-    //TODO: Use something more elegant than a `Value`
-    pub fn modify_user_config(&self, domain: &str, changes: Value) -> ClientResult<()> {
-        self.notify(
-            "modify_user_config",
-            json!({
-                "domain": domain,
-                "changes": changes,
-            }),
-        )
+    pub fn modify_user_config(&self, domain: ConfigDomain, changes: ConfigChanges) -> ClientResult<()> {
+        let modify_user_config = ModifyUserConfig { domain, changes };
+        match to_value(modify_user_config) {
+            Ok(value) => self.notify("modify_user_config", value),
+            Err(e) => Box::new(future::err(e.into())),
+        }
     }
 
     // TODO: requests for plugin_rpc

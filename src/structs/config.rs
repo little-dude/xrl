@@ -15,3 +15,17 @@ pub struct ConfigChanges {
     pub tab_size: Option<u64>,
     pub translate_tabs_to_spaces: Option<bool>,
 }
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub struct ModifyUserConfig {
+    pub domain: ConfigDomain,
+    pub changes: ConfigChanges,
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ConfigDomain {
+    General,
+    Syntax(String),
+    UserOverride(String),
+}

@@ -114,5 +114,5 @@ pub use crate::structs::{
     ThemeSettings, Query, Status, Alert, AvailableThemes, AvailableLanguages,
     UpdateCmds, ConfigChanged, ConfigChanges, ScrollTo, Position,
     Update, Style, Operation, OperationType, Line, StyleDef, LanguageChanged,
-    ViewId, ModifySelection, FindStatus, ReplaceStatus, MeasureWidth,
+    ViewId, ModifySelection, FindStatus, ReplaceStatus, MeasureWidth, ModifyUserConfig, ConfigDomain
 };
